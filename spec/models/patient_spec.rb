@@ -21,4 +21,22 @@ RSpec.describe Patient do
       end
     end
   end
+
+  describe 'class methods' do
+    before(:each) do
+      @hospital = Hospital.create!(name: 'Generic Hospital')
+
+      @doctor = @hospital.doctors.create!(name: 'rando', specialty: 'pinky toes', university: 'middle school')
+
+      @patient1 = @doctor.patients.create!(name: 'child a', age: 2)
+      @patient2 = @doctor.patients.create!(name: 'a litteral rat', age: 1)
+      @patient3 = @doctor.patients.create!(name: 'old guy', age: 3)
+    end
+
+    describe '.age_order' do
+      it 'orders the patients by age' do
+        expect(Patient.age_order).to eq([@patient3, @patient1, @patient2])
+      end
+    end
+  end
 end

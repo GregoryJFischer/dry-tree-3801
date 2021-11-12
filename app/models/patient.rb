@@ -5,4 +5,8 @@ class Patient < ApplicationRecord
   def doctor_patient(doctor)
     DoctorPatient.find_by(patient_id: self.id, doctor_id: doctor.id)
   end
+
+  def self.age_order
+    order(age: :desc)
+  end
 end
