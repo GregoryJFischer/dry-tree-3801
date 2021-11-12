@@ -32,4 +32,14 @@ RSpec.describe 'doctor show page' do
     expect(page).to have_content(@patient2.name)
     expect(page).to have_content(@patient3.name)
   end
+
+  it 'can remove a patient' do
+    visit doctor_path(@doctor)
+
+    within("#patient-#{@patient1.id}") do
+      click_on("Remove")
+    end
+
+    expect(page).to_not have_content(@patient1.name)
+  end
 end
